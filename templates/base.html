@@ -1,6 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}{% endblock %}
 {% block head %}{{ super() }}{% endblock %}
+
 {% block content %}
 {% for message in get_flashed_messages() %}
 <div class="alert alert-success" role="alert">

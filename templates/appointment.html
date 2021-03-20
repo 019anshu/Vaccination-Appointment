@@ -5,62 +5,69 @@
 <div class="container-fluid">
     <h1><b>Appointment Booking</b></h1>
     {% block add %}
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.dose.label }}
-                {{ form.dose() }}
+    <form id="appointment" action="" method="POST" class="appointment-form" role="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.dose.label }}
+                    {{ form.dose() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.district.label }}
+                    {{ form.district() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.age.label }}
+                    {{ form.age() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.location.label }}
+                    {{ form.location() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.datetime.label }}
+                    {{ form.datetime() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.firstname.label }}
+                    {{ form.firstname() }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.lastname.label }}
+                    {{ form.lastname() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.email.label }}
+                    {{ form.email() }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.phone.label }}
+                    {{ form.phone() }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.aadhar.label }}
+                    {{ form.aadhar() }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.submit() }}
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.district.label }}
-                {{ form.district() }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.age.label }}
-                {{ form.age() }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.datetime.label }}
-                {{ form.datetime() }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.firstname.label }}
-                {{ form.firstname() }}
-            </div>
-            <div class="col-md-6">
-                {{ form.lastname.label }}
-                {{ form.lastname() }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.email.label }}
-                {{ form.email() }}
-            </div>
-            <div class="col-md-6">
-                {{ form.phone.label }}
-                {{ form.phone() }}
-            </div>
-            <div class="col-md-6">
-                {{ form.aadhar.label }}
-                {{ form.aadhar() }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form.submit() }}
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
 <div class="container">
     <h3>Your Vaccine Appointment</h3>
