@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Vaccine- Appointment{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <h1><b>Appointment Booking</b></h1>
+    {% block add %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.dose.label }}
+                {{ form.dose() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.district.label }}
+                {{ form.district() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.age.label }}
+                {{ form.age() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.datetime.label }}
+                {{ form.datetime() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.firstname.label }}
+                {{ form.firstname() }}
+            </div>
+            <div class="col-md-6">
+                {{ form.lastname.label }}
+                {{ form.lastname() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.email.label }}
+                {{ form.email() }}
+            </div>
+            <div class="col-md-6">
+                {{ form.phone.label }}
+                {{ form.phone() }}
+            </div>
+            <div class="col-md-6">
+                {{ form.aadhar.label }}
+                {{ form.aadhar() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.submit() }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3>Your Vaccine Appointment</h3>
+    <p>Because COVID-19 is a new disease with new vaccines, you may have questions about what happens before, during,
+        and after your appointment to get vaccinated. These tips will help you know what to expect when you get
+        vaccinated, what information your provider will give you, and resources you can use to monitor your health after
+        you are vaccinated.</p>
+</div>
+
+
+
+
+{% endblock %}
+{% endblock %}
