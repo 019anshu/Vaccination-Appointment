@@ -152,10 +152,6 @@ def safety():
 @app.route('/efficiency')
 def efficiency():
     return render_template('efficiency.html', title="Efficiency")
-
-@app.route('/vaccinesToYou')
-def vaccinesToYou():
-    return render_template('vaccinesToYou.html', title="Vaccines To You")
     
 @app.errorhandler(404)
 def page_not_found(e):
