@@ -1,84 +1,74 @@
 {% extends "base.html" %}
 
-{% block title %}Vaccine- Appointment{% endblock %}
 {% block body %}
-<div class="container-fluid">
-    <h1><b>Appointment Booking</b></h1>
-    {% block add %}
-    <form id="appointment" action="" method="POST" class="appointment-form" role="form">
-        <div class="container">
+
+<div class="container">
+    <h1><br>Book your Vaccination Appointment Now!</h1>
+    <hr>
+    <img class="img-fluid" src="/static/vaccine3.jfif" align="right" style="width:250px;height:550px;"
+                    alt="COVID-19 Awareness">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    {{ form.dose.label }}
-                    {{ form.dose() }}
+                    {{ form.dose.label(class="form-control-label") }}
+                    {{ form.dose(class="form-check") }}
+                   
+                </div>
+                <div class="col-md-6">
+                    {{ form.district.label(class="form-control-label") }}
+                    {{ form.district(class="form-select") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.age.label(class="form-control-label") }}
+                    {{ form.age(class="form-check") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.location.label(class="form-control-label") }}
+                    {{ form.location(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.datetime.label(class="form-control-label") }}
+                    {{ form.datetime(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.firstname.label(class="form-control-label") }}
+                    {{ form.firstname(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                {{ form.lastname.label(class="form-control-label") }}
+                {{ form.lastname(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                             {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}                     
+                </div>
+                <div class="col-md-6">
+                    {{ form.phone.label(class="form-control-label") }}
+                    {{ form.phone(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.aadhar.label(class="form-control-label") }}
+                    {{ form.aadhar(class="form-control") }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.district.label }}
-                    {{ form.district() }}
-                </div>
+            <hr>
+            <div class="form-group" align="center">
+                {{ form.submit(class="btn btn-outline-dark") }}
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.age.label }}
-                    {{ form.age() }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.location.label }}
-                    {{ form.location() }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.datetime.label }}
-                    {{ form.datetime() }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.firstname.label }}
-                    {{ form.firstname() }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.lastname.label }}
-                    {{ form.lastname() }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.email.label }}
-                    {{ form.email() }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.phone.label }}
-                    {{ form.phone() }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.aadhar.label }}
-                    {{ form.aadhar() }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{ form.submit() }}
-                </div>
-            </div>
-        </div>
+            <hr>
+        </fieldset>
     </form>
 </div>
-<div class="container">
-    <h3>Your Vaccine Appointment</h3>
-    <p>Because COVID-19 is a new disease with new vaccines, you may have questions about what happens before, during,
-        and after your appointment to get vaccinated. These tips will help you know what to expect when you get
-        vaccinated, what information your provider will give you, and resources you can use to monitor your health after
-        you are vaccinated.</p>
-</div>
 
-
-
-
-{% endblock %}
 {% endblock %}

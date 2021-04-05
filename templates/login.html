@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1><br>Log In</h1>
+    <hr>
+    <img class="img-fluid" src="/static/vaccine4.jfif" align="right" alt="COVID-19 Awareness">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{ form.remember(class="form-check-input") }}
+                {{ form.remember.label(class="form-check-label") }}
+            </div>
+            <hr>
+            <div class="form-group" align="center">
+                <p>{{ form.submit(class="btn btn-outline-dark") }}</p>
+                <p><a href="#">Forgot Password?</a></p>
+                <p>Need An Account? <a class="ml-2" href="{{ url_for('signup') }}">Sign Up Now</a></p>
+            </div>
+            <hr>
+        </fieldset>
+    </form>  
+</div>
+{% endblock %}
