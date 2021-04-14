@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h2 style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;">
-    <br>{{ current_user.username }}! Your Appointment Details are given below!<br><br>
-</h2>
+<div class="container">
+    <h1><br>{{ current_user.username }}! Your Appointment Details are given below!<br><hr><br></h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No.</th>
+            <th scope="col"> Your Name</th>
+            <th scope="col">Dose</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Vaccination Centre</th>
+          </tr>
+        </thead>    
+        <tbody>
+            {% for apt in allapt %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ apt.firstname }} {{ apt.middlename }} {{ apt.lastname }}</td>
+                <td>{{ apt.dose }}</td>
+                <td>{{ apt.date }}</td>
+                <td>{{ apt.timeslot }}</td>
+                <td>{{ apt.location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</div>
 {% endblock %}

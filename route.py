@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, flash, redirect, session, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField , DateField, RadioField, SelectField, PasswordField, BooleanField
+from wtforms import StringField, TextAreaField, SubmitField , IntegerField, DateTimeField, DateField, RadioField, SelectField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from wtforms.fields.html5 import EmailField
 from datetime import datetime
@@ -31,31 +31,31 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"User('{self.username}', '{self.email}')"
 
-class ContactUs(FlaskForm):
-    dose = RadioField('Are you seeking your first of second dose of the COVID-19 vaccine?', choices=[('value1','First Dose'),('value2','Second Dose')], validators=[DataRequired()]) 
-    district = SelectField('Check to see which districts are accepting appointments', choices=[('val', '---select---'),('val1', 'Ranchi'), ('val2', 'Gumla'), ('val3', 'Koderma'), ('val4', 'Latehar'), ('val5', 'Garwa'), ('val6', 'Lohardaga'), ('val7', 'Bokaro'), ('val8', 'Dhanbad')], validators=[DataRequired()])
-    age = RadioField('Please indicate your age range',choices=[('val1','below age 15'),('val2','between age 16 and 24'),('val3','between age 25 and 34'),('val4','between age 35 and 44'),('val5','between age 45 and 54'),('val6','between age 55 and 64'),('val2','above age 65')], validators=[DataRequired()])
-    location = StringField('Appointment Locations', validators=[DataRequired()])
-    datetime = DateField('Appointment Date & Time', validators=[DataRequired()])
-    firstname = StringField('First Name', validators=[DataRequired()])
-    lastname = StringField('Last Name', validators=[DataRequired()])
-    email = EmailField('Email', validators=[DataRequired()])
-    phone = StringField('Phone', validators=[DataRequired()])
-    aadhar = StringField('Aadhar', validators=[DataRequired()])
-    address = TextAreaField('Address', validators=[DataRequired()])
-    submit = SubmitField('Submit' )
+class Appointment(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(10), nullable=False)
+    middlename = db.Column(db.String(10), nullable=False)
+    lastname = db.Column(db.String(10), nullable=False)
+    mobile = db.Column(db.String(10), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    address = db.Column(db.String(10), nullable=False)
+    dob = db.Column(db.String(10), nullable=False)
+    aadhar = db.Column(db.String(10), unique=True, nullable=False)
+    dose = db.Column(db.String(10), nullable=False)
+    another = db.Column(db.String(10), nullable=False)
+    age = db.Column(db.String(10), nullable=False)
+    district = db.Column(db.String(10), nullable=False)
+    location = db.Column(db.String(10), nullable=False)
+    date = db.Column(db.String(10), nullable=False)
+    timeslot = db.Column(db.String(10), nullable=False)
 
-class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    def __repr__(self):
+        return f"Appointment('{self.firstname}', '{self.email}', '{self.aadhar}')"
 
 class SignupForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -73,6 +73,12 @@ class SignupForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken, Please choose another one!')
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
 @app.route('/')
 def home():
@@ -114,12 +120,8 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash(f'User Logged out!', 'success')
     return redirect(url_for('home'))
-
-@app.route('/booking')
-@login_required
-def booking():
-    return render_template("booking.html", title="Your Booking Details", current_user=current_user)
 
 @app.route('/keyThings')
 def keyThings():
@@ -133,18 +135,6 @@ def benefits():
 def info():
     return render_template('info.html', title="Info")
 
-@app.route('/appointment')
-@login_required
-def appointment():
-    form= ContactUs()
-    if request.method == 'POST':
-        if form.validate_on_submit:
-            name = form.name.data
-
-            flash("Your query is successfully posted!")
-            return redirect(url_for('appointment'))
-    return render_template('appointment.html', title="Appointment",form=form)
-
 @app.route('/safety')
 def safety():
     return render_template('safety.html', title="Safety")
@@ -152,6 +142,42 @@ def safety():
 @app.route('/efficiency')
 def efficiency():
     return render_template('efficiency.html', title="Efficiency")
+
+@app.route('/appointment', methods=['GET', 'POST'])
+@login_required
+def appointment():
+    if request.method  == 'POST':
+            firstname = request.form.get("firstname")
+            middlename = request.form.get("middlename")
+            lastname = request.form.get("lastname")
+            mobile = request.form.get("mobile")
+            email = request.form.get("email")
+            address = request.form.get("address")
+            dob = request.form.get("dob")
+            aadhar = request.form.get("aadhar")
+            dose = request.form.get("dose")
+            another = request.form.get("another")
+            age = request.form.get("age")
+            district = request.form.get("district")
+            location = request.form.get("location")
+            date = request.form.get("date")
+            timeslot = request.form.get("timeslot")
+            apt= Appointment(firstname=firstname,middlename=middlename,lastname=lastname,mobile=mobile,email=email,
+                address=address,dob=dob,aadhar=aadhar,dose=dose,another=another,age=age,
+                district=district,location=location,date=date,timeslot=timeslot)
+            db.session.add(apt)
+            db.session.commit()
+            allapt = Appointment.query.all()
+            flash(f'{firstname}! Your Appointment is successfully booked!', 'success')
+            return redirect(url_for('booking'))
+    return render_template('appointment.html', title="Appointment")
+
+@app.route('/booking')
+@login_required
+def booking():
+    allapt = Appointment.query.filter_by(email=current_user.email).all()
+    print(allapt)
+    return render_template("booking.html", title="Your Booking Details",allapt=allapt, current_user=current_user)
     
 @app.errorhandler(404)
 def page_not_found(e):

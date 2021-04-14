@@ -3,70 +3,147 @@
 {% block body %}
 
 <div class="container">
-    <h1><br>Book your Vaccination Appointment Now!</h1>
-    <hr>
-    <img class="img-fluid" src="/static/vaccine3.jfif" align="right" style="width:250px;height:550px;"
-        alt="COVID-19 Awareness">
     <form method="POST" action="">
-        {{ form.hidden_tag() }}
         <fieldset class="form-group">
+            <h1><br>Book your Vaccination Appointment Now!</h1>
+            <hr>
+            <img class="img-fluid" src="/static/vaccine3.jfif" align="right" style="width:250px;height:550px;"
+                alt="COVID-19 Awareness">
             <div class="row">
-                <div class="col-md-6">
-                    {{ form.dose.label(class="form-control-label") }}
-                    {{ form.dose(class="form-check") }}
-
-                </div>
-                <div class="col-md-6">
-                    {{ form.district.label(class="form-control-label") }}
-                    {{ form.district(class="form-select") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.age.label(class="form-control-label") }}
-                    {{ form.age(class="form-check") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.location.label(class="form-control-label") }}
-                    {{ form.location(class="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.datetime.label(class="form-control-label") }}
-                    {{ form.datetime(class="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.firstname.label(class="form-control-label") }}
-                    {{ form.firstname(class="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.lastname.label(class="form-control-label") }}
-                    {{ form.lastname(class="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                    {{ form.email(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
+                <p>Information regarding the Vaccination:</p>
+                <hr>
+                <hr>
+                <div class="col-md-8">
+                    <label class="form-check-label" for="dose">Are you seeking your first of second dose of the COVID-19 vaccine?</label> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="dose" value="first" id="first">
+                        <label class="form-check-label" for="first">
+                            First Dose
+                        </label>
                     </div>
-                    {% else %}
-                    {{ form.email(class="form-control") }}
-                    {% endif %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="dose" value="second" id="second">
+                        <label class="form-check-label" for="second">
+                            Second Dose
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-control-label" for="another">Did you receive any other vaccine within 14 days?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="another" value="yes" id="yes">
+                        <label class="form-check-label" for="yes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="another" value="no" id="no">
+                        <label class="form-check-label" for="no">
+                            No
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    {{ form.phone.label(class="form-control-label") }}
-                    {{ form.phone(class="form-control") }}
+                    <label class="form-control-label" for="age">Please indicate your age range</label>
+                    <select class="form-select" name="age" required>
+                        <option selected></option>
+                        <option value="below age 15">below age 15</option>
+                        <option value="between age 16 and 24">between age 16 and 24</option>
+                        <option value="between age 25 and 34">between age 25 and 34</option>
+                        <option value="between age 35 and 44">between age 35 and 44</option>
+                        <option value="between age 45 and 54">between age 45 and 54</option>
+                        <option value="between age 55 and 64">between age 55 and 64</option>
+                        <option value="above age 65">above age 65</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
-                    {{ form.aadhar.label(class="form-control-label") }}
-                    {{ form.aadhar(class="form-control") }}
+                    <label class="form-control-label" for="district">Districts accepting appointments</label>
+                    <select class="form-select" name="district" required>
+                        <option selected></option>
+                        <option value="Ranchi">Ranchi</option>
+                        <option value="Gumla">Gumla</option>
+                        <option value="Lohardaga">Lohardaga</option>
+                        <option value="Garhwa">Garhwa</option>
+                        <option value="Latehar">Latehar</option>
+                        <option value="Koderma">Koderma</option>
+                        <option value="Bokaro">Bokaro</option>
+                        <option value="Dhanbad">Dhanbad</option>
+                    </select>
                 </div>
-            </div>
-            <hr>
-            <div class="form-group" align="center">
-                {{ form.submit(class="btn btn-outline-dark") }}
-            </div>
-            <hr>
+                <div class="col-md-8">
+                    <label class="form-control-label" for="location">Select your nearest Vaccination Centre</label>
+                    <select class="form-select" name="location" required>
+                        <option selected></option>
+                        <option value="A Hospital">A Hospital</option>
+                        <option value="B Hospital">B Hospital</option>
+                        <option value="C Hospital">C Hospital</option>
+                        <option value="D Hospital">D Hospital</option>
+                        <option value="E Hospital">E Hospital</option>
+                        <option value="F Hospital">F Hospital</option>
+                        <option value="G Hospital">G Hospital</option>
+                        <option value="H Hospital">H Hospital</option>
+                    </select>
+                </div>  
+                <div class="col-md-8">
+                    <label class="form-control-label" for="date">Please select an appropriate Date for the Appointment</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-control-label" for="">Please select the suitable Time Slot</label>
+                    <select class="form-select" name="timeslot" required>
+                        <option selected></option>
+                        <option value="08:00-08:30">08:00-08:30</option>
+                        <option value="08:30-09:00">08:30-09:00</option>
+                        <option value="09:00-09:30">09:00-09:30</option>
+                        <option value="09:30-10:00">09:30-10:00</option>
+                        <option value="10:00-10:30">10:00-10:30</option>
+                        <option value="10:30-11:00">10:30-11:00</option>
+                        <option value="11:00-11:30">11:00-11:30</option>
+                        <option value="11:30-12:00">11:30-12:00</option>
+                    </select>
+                </div>
+                <hr>
+                <p>Contact Details:</p>
+                <hr>
+                <hr>
+                <div class="col-md-4">
+                    <label class="form-control-label" for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-control-label" for="middlename">Middle Name</label>
+                    <input type="text" id="middlename" name="middlename" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-control-label" for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-control-label" for="mobile">Your Mobile Number</label>
+                    <input type="number" id="mobile" name="mobile" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-control-label" for="email">Your Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-control-label" for="address">Your Current Residence Address</label>
+                    <textarea id="address" name="address" class="form-control" required></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-control-label" for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" class="form-control" required>
+                </div>
+                    <div class="col-md-6">
+                        <label class="form-control-label" for="aadhar">Your Unique Identification Number</label>
+                        <input type="number" id="aadhar" name="aadhar" class="form-control" required>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-dark">Book Appointment</button>
+                </div>
+                <hr>
         </fieldset>
     </form>
 </div>
